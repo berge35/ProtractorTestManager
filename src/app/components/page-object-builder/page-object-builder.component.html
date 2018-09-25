@@ -1,0 +1,76 @@
+<h3>Page Object Builder</h3>
+<div class="page-info">
+  <div class="row">
+    <label for="pageName">Page Name</label>
+  </div>
+  <div class="row">
+    <input type="text" name="pageName" id="pageName" [(ngModel)]="pageObject.name">
+  </div>
+  <div class="row">
+    <label for="pageDesc">Page Description</label>
+  </div>
+  <div class="row">
+    <textarea name="pageDesc" id="pageDesc" cols="30" rows="5" [(ngModel)]="pageObject.description"></textarea>
+  </div>
+</div>
+<div>
+    <h3>Elements</h3>
+    <div class="row">
+        <div class="col-2">Name</div>
+        <div class="col-2">Element Type</div>
+        <div class="col-2">ID Type</div>
+        <div class="col-2">Identifier</div>
+      </div>
+  <div class="row el" *ngFor="let element of elements">
+      <div class="col-2">{{element.name}}</div>
+      <div class="col-2">{{element.type}}</div>
+      <div class="col-2">{{element.idType}}</div>
+      <div class="col-2">{{element.identifier}}</div>
+      <div class="col-2" ><button class="btn btn-danger btn-sm" (click)="elements.splice( elements.indexOf(element), 1 );">Remove</button></div>
+  </div>
+  <div class="row" style="padding-top: 5px;">
+    <div class="col-2"><input type="text" placeholder="Name" id="name" [(ngModel)]="newElement.name"></div>
+    <div class="col-2">
+        <select [(ngModel)]="newElement.type">
+          <option value="input">Input</option>
+          <option value="select">Select</option>
+          <option value="button">Button</option>
+          <option value="link">Link</option>
+        </select>
+      </div>
+    <div class="col-2">
+      <select [(ngModel)]="newElement.idType">
+        <option value="XPath">XPath</option>
+        <option value="ID">ID</option>
+        <option value="Name">Name</option>
+        <option value="CSS">CSS</option>
+      </select>
+    </div>
+    <div class="col-2"><input type="text" placeholder="Identifier" id="identifier" [(ngModel)]="newElement.identifier"></div>
+    <div class="col-2"><button class="btn btn-primary btn-sm" (click)="addElement()">ADD</button></div>
+  </div>
+</div>
+<br>
+<div class="row">
+  <h3>Functions</h3>
+</div>
+<div class="" *ngFor="let func of functions">
+  <div class="row"><h4>{{func.name}}</h4></div>
+  <select id="func.name" (change)="setActions($event.target.value)">
+    <option *ngFor="let element of elements" [value]="element">{{element.name}}</option>
+  </select>
+  <select>
+    <option *ngFor="let action of actionTypes" value="action">{{action}}</option>
+  </select>
+  <br>
+  <div class="row">
+      <button class="btn btn-primary" (click)="addAction(func)">Add Action</button>
+  </div>
+</div>
+<div class="row">
+  <input type="text" placeholder="Function Name" [(ngModel)]="newFunc.name">
+  <div class="col-2"><button class="btn btn-primary btn-sm" (click)="addFunction()">Add Function</button></div>
+</div>
+
+<br><br>
+<button class="btn btn-success btn-lg" (click)="constructPageObject()">Create Page Object</button>
